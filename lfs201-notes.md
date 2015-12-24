@@ -33,22 +33,30 @@
               can be `[user@]host`
             * `-r` => recursive copy
             * `-dry-run` => doesn't commit changes
-            * `gzip`, `bzip2`, `xz`, `zip` are compression programs
-                * `gzip -r` => for recursive zipping, .gz extension
-                * `gunzip` => for uncompressing, same as `gzip -d`
-                * `bunzip2` => uncompressing bzip2 files, .bz2 extension
-                * `xz` removes original; files after archiving, use `-k` to keep the files  
-                `-d` to decompress
-                * `zip, unzip` can use `-r`
-            * `tar` is tape archive, makes a 'tarball', can use compression
-                * `tar xvf [file]` => extract verbosely a file named after  
-                  the `f`
-                * `tar cvf [file]` => verbosely create a tarball named 'file'
-                * `z` => add gzip compression
-                * `j` => add bzip2 compression
-                * `J` => add xz compression
-            * `dd` is disk-to-disk copying
-                * `if=` => input disk device file
-                * `of=` => output file/device
-                * `bs=` => block size
-                * `count=` => how many blocks to copy
+        * `gzip`, `bzip2`, `xz`, `zip` are compression programs
+            * `gzip -r` => for recursive zipping, .gz extension
+            * `gunzip` => for uncompressing, same as `gzip -d`
+            * `bunzip2` => uncompressing bzip2 files, .bz2 extension
+            * `xz` removes original; files after archiving, use `-k` to keep the files  
+            `-d` to decompress
+            * `zip, unzip` can use `-r`
+        * `tar` is tape archive, makes a 'tarball', can use compression
+            * `tar xvf [file]` => extract verbosely a file named 'file'
+            * `tar cvf [file]` => verbosely create a tarball named 'file'
+            * `z` => add gzip compression
+            * `j` => add bzip2 compression
+            * `J` => add xz compression
+        * `dd` is disk-to-disk copying
+            * `if=` => input disk device file
+            * `of=` => output file/device
+            * `bs=` => block size
+            * `count=` => how many blocks to copy
+        * `sudo` is preferred to `su`
+          * config in `/etc/sudoers` and in `/etc/sudoers.d/`
+          * logs to `/var/log/secure`
+          * use `visudo` to edit config
+          * line entry is `who where = (as_whom) what`
+          * add file to `/etc/sudoers.d/` with same name as user so as not  
+            to edit the main file
+          * commands run under `sudo` are logged to `/var/log/auth.log` in Debian  
+           and family, `/var/log/messages` or `/var/log/secure` on others

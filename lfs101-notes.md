@@ -107,3 +107,21 @@
 * `ssh` => command to have a remote shell securely
 * `scp` => use SSH to copy files securely between two systems
   * `scp <localfile> <user@remote>:/path/to/copy` => usage
+---
+* ### Text Editing
+  * `sed` => stream editor
+    * `sed -e command <file>` => run commands on file on CLI
+    * `sed -f scriptfile <file>` => run commands from scriptfile on file
+    * `sed s/pattern/replace/ file` => replace first 'pattern' found per line
+    * `sed s/pattern/replace/g file` => replace many times per line
+    * `sed 1,3s/pattern/replace/g file` => limit replacements to range of lines 1-3
+    * `sed -i s/pattern/replace/g file` => save replacements back to same file,
+      dangerous
+  * `awk` is used to extract and print specific contents of a file for reports
+    * `awk 'command' var=value file` => run command directly on file
+    * `awk -f scriptfile var=value file` => run commands from scriptfile on file
+    * `awk '{ print $0 }' /etc/passwd` => prints entire password file
+    * `awk -F: '{ print $1 }' /etc/passwd` => prints first field of lines delimited by ':'
+    * `awk -F: '{ print $1 $6 }' /etc/passwd` => print first field and sixth field  
+     in /etc/passwd separated by a space for every line
+---

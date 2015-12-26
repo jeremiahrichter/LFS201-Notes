@@ -4,6 +4,8 @@
 ---
 
 *The link to the free LFS101 course is [here](https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS101x.2+1T2015/courseware/18780407cf8946c389bed38c4748418c/ "LFS101x")*
+
+---
 * `locate` uses `updatedb` which needs root, is indexed
 * `file` is a recursive search, non-indexed, uses cwd  
     * `<no args>` => all files in cwd
@@ -22,6 +24,7 @@
     * `size [number{ⵁ,c,k,M,G}]` => size can be searched, a raw number
       being used for 512-byte blocks, c for bytes, k for kilobytes, M
       megabytes, G gigabytes, `n`, `+n` `-n` meaning as above
+---
 * backup uses `cp` or `rsync`
     * `rsync` doesn't copy not changed files
     * `rsync` can remote copy using `[target]:[path]` where target
@@ -46,6 +49,7 @@
     * `of=` => output file/device
     * `bs=` => block size
     * `count=` => how many blocks to copy
+---
 * `sudo` is preferred to `su`
   * config in `/etc/sudoers` and in `/etc/sudoers.d/`
   * logs to `/var/log/secure`
@@ -55,3 +59,49 @@
     to edit the main file
   * commands run under `sudo` are logged to `/var/log/auth.log` in Debian  
     and family, `/var/log/messages` or `/var/log/secure` on others
+---
+* networking commands:
+  * `/etc/hosts` => map of IP addresses to hostnames
+  * `/etc/resolve.conf` => order of where to look for info
+  * `host, dig` => look up IP's for hostnames
+  * Debian family network scripts are in `/etc/network/interfaces` and one can  
+    start the network interfaces with `/etc/init.d/networking start`
+    * For systemd-based systems, routing and host info are in
+      `/etc/sysconfig/network` and interface scripts are in `/etc/sysconfig/network-scripts/ifcfg-eth0`
+    * you can start networks on those systems with `/etc/init.d/network start`, as well
+  * `/sbin/ip addr show` => for IP addresses
+  * `/sbin/ip route show` => for routing info
+  * `ping` => check attached machine to see if can send/receive
+    * `-c number` is number of pings, or press `Ctrl-C` to exit
+  * `route` is to show network routes and change them
+    * `-n` => to show current routes
+    * `route add -net address` => add static route
+    * `route del -net address` => delete static route
+  * `traceroute` inspects which route to reach host is taken
+    * `traceroute <domain>` => usage
+  * `ethtool` => Queries network interfaces and can also set various  
+    parameters such as the speed.
+  * `netstat`	=> Displays all active connections and routing tables.  
+    Useful for monitoring performance and troubleshooting.
+  * `nmap` => Scans open ports on a network. Important for security analysis
+  * `tcpdump` => Dumps network traffic for analysis.
+  * `iptraf` => Monitors network traffic in text mode.
+* browsers:
+  * `lynx` => text-based, older
+  * `links/elinks` => newer, with tables frames, but still text-based
+  * `w3m` => newer text-based browser
+* `wget` => is a command line utility that can capably handle the following  
+  types of downloads:
+  Large file downloads,
+  Recursive downloads, where a web page refers to other web pages and all are downloaded at once
+  Password-required downloads,
+  Multiple file downloads
+* `curl` => can get info on file to download, like source
+  * `curl -o 'file' <url>` => to download <url> to file 'file'
+* ftp:
+  * `ftp, sftp, ncftp, yafc` => CLI FTP clients
+    * `sftp` uses ssh, cannot connect anonymously
+* `ssh` => command to have a remote shell securely
+* `scp` => use SSH to copy files securely between two systems
+  * `scp <localfile> <user@remote>:/path/to/copy` => usage
+  

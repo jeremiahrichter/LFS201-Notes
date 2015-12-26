@@ -59,4 +59,5 @@
           * add file to `/etc/sudoers.d/` with same name as user so as not  
             to edit the main file
           * commands run under `sudo` are logged to `/var/log/auth.log` in Debian  
-           and family, `/var/log/messages` or `/var/log/secure` on others
+            and family, `/var/log/messages` or `/var/log/secure` on others
+        

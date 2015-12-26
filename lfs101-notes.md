@@ -165,3 +165,5 @@
       job, and `c`-files are control files
     * log files are in `/var/log/cups`
     * `/etc/cups/ppd/` where connected printers' have config files
+    * `http://localhost:631` is address for cups web interface
+---

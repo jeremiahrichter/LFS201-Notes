@@ -123,5 +123,35 @@
     * `awk '{ print $0 }' /etc/passwd` => prints entire password file
     * `awk -F: '{ print $1 }' /etc/passwd` => prints first field of lines delimited by ':'
     * `awk -F: '{ print $1 $6 }' /etc/passwd` => print first field and sixth field  
-     in /etc/passwd separated by a space for every line
+      in /etc/passwd separated by a space for every line
+  * `sort` sorts lines of text
+    * `sort -u` => filters out unique values after sorting; `uniq` filters but requires  
+      sorted input, so `sort -u` saves a step
+    * `sort -r` => sorts in reverse order
+  * `uniq -c` => counts the number of duplicate entries
+  * `paste` merges lines from two files into single lines separated by characters
+    * `-d` => a list of delimiters instead of tabs to use, each one used consecutively
+    * `-s` => append in a series without line breaks
+  * `join` => like paste but checks for common fields before joining
+  * `split` => splits a long file into smaller files with a prefix
+    * `split file <prefix>` => usage
+  * `grep` is a pattern-matching text search tool
+    * `grep <pattern> filename` => basic usage
+    * `grep -v <pattern> filename` => print lines that do **NOT** match pattern
+    * `grep -C [number] <pattern> filename` => prints 'number' of lines around  
+      and below the lines matching the patterns
+  * `tr [options] set1 set2 < 'inputfile' > 'outputfile'` replaces one set of  
+    *characters* for another set, one for one from inputfile and saves to outputfile
+    * `-c` is a set complement, `-d` is to delete
+  * `tee 'newfile'` reads output to the screen and saves the output as well to newfile
+  * `wc` counts # of lines, words, characters in a file
+    * `-l` => just line count
+    * `-c` => byte count
+    * `-w` => just word count
+  * `cut` extracts columns based on delimiters
+    * `cut -d" " -f3"` => cut out third column separated by spaces
+  * `less, head, tail` displays parts of files
+    * `-n` => in `head`/`tail`, limit to *n* lines
+    * `-f` => with tail continues to monitor and re-output last few lines
+  * `strings` => finds strings in binary files 
 ---

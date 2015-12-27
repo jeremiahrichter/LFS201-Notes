@@ -31,10 +31,12 @@
       using **Upstart** or **systemd**
   * the **BIOS** loads the boot loader from the **MBR**
   * boot loaders:
-          GRUB (most common)
-          LILO (obsolete)
-          efilinux (for UEFI)
-          Das U-Boot (embedded)
+    ```
+    GRUB (most common)
+    LILO (obsolete)
+    efilinux (for UEFI)
+    Das U-Boot (embedded)
+    ```
   * config files are in `/etc`:
     * Debian uses `/etc/default`
     * RHEL uses `/etc/sysconfig`
@@ -69,3 +71,76 @@
   * in version 2, hard drives are `hd0`, `hd1`, etc, and partitions start at 1
   * the *root* partition, in `GRUB` lingo, is the partition the kernel is
     stored, i.e.: in the `/boot` directory
+4. ### init: SystemV, Upstart, Systemd
+  * `/sbin/init`: first user-level process run on the system and runs until
+    shutdown, configures environment, starts login process
+  * **SysVinit** was for multi-user mainframes, single processor, each stage must
+    complete before next stage of startup could begin, *serial* process
+  * **Upstart** was developed in 2006 by Ubuntu
+  * **Systemd** is more recent, adopted first by Fedora in 2011
+    * is now default for every major Linux distros
+  * `sysvinit`-compatibility layers will persist for the foreseeable future
+    * `sysvinit` passes through various *runlevels*, or stages, which define
+      different states, numbered 0-6, here are Red Hat's runlevels:
+      ```
+      0 system halt state
+      1 single-user mode
+      2 distro-defined (multi-user without networking)
+      3 distro-defined (multi-user with networking, CLI)
+      4 distro-defined (not used)
+      5 distro-defined (multi-user, usually X and networking)
+      6 reboot
+      s same as 1
+      ```
+    * `runlevel` displays previous and current runlevel, `N` is unknown runlevel
+    * `telinit 'runlevel'`: changes runlevel to 'runlevel'
+    * `/etc/inittab`: traditionally told `init` which scripts to run at which
+      runlevel, lines are written `id:runlevel:action:process`:
+      ```
+      id:       1-4 chars, unique, for each entry
+      runlevel: zero or more chars/digits to identify runlevel
+      action:   action to take
+      process:  process to be executed
+      ```
+      in Red Hat there is only the one line `id:5:initdefault`, which states the
+      default runlevel
+    * `/etc/rc.sysinit` script would mount filesystems, etc., this was usually a
+      symbolic link to `/etc/rc.d/{somefile}`, then `/etc/rc` script was run with
+      desired runlevel as an argument. The system would then look in
+      `/etc/rc.d/rc[0-6].d/` and run the scripts in there
+    * `/etc/rc.local` would start system-specific scripts
+    * Note:
+      * all startup scripts are in `/etc/init.d/`; each runlevel links to them
+      * **start** scripts start with an **S**
+      * **kill** scripts begin with an **K**
+      * script's name is then the name of the service, one manages scripts by
+        managing links, can be manual or with `chkconfig`
+    * `chkconfig servicename`: check if set to run in current runlevel
+    * `chkconfig --list [service_names]`: what services in which runlevels
+    * `sudo chkconfig service on`: enables service to run on next boot
+    * `sudo chkconfig service off`: reverses the above
+    * `sudo chkconfig service [start | stop]`: starts/stops service now without
+      reboot
+    * add script with certain lines to `/etc/init.d/`, run `chkconfig --add` to
+      enable, `chkconfig --del` to disable
+        * example line: `# chkconfig 2345 10 90` runs in 2-5 runlevels, starts
+        with priority `S10` script, ends with `590` script
+    * `sudo service 'service' status` command would check service status of
+      script in `/etc/init.d/`
+    * `sudo service 'servicename' {start|stop|restart|reload|status}` are the
+      usual options
+    * `sudo service --status-all` for all services
+    * recent versions of Ubuntu won't use `chkconfig`:
+      * `sudo invoke-rc.d service [status|start|stop]` or `sudo status 'service'`
+      * `sudo update-rc.d 'service' [defaults|purge]`
+      * `sudo sysv-rc-conf 'service' [on|off]`
+  * `Upstart` is *event-driven*, rather than serial; events are sent to `init` to
+    tell it to execute certain commands when prerequisites are met; superseded by
+    `systemd`, config files:
+    ```
+    /etc/init/rcS.conf
+    /etc/rc-sysinit.conf
+    /etc/inittab
+    /etc/init/rc.conf
+    /etc/rc[0-6].d
+    ```

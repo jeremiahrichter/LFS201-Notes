@@ -144,3 +144,34 @@
     /etc/init/rc.conf
     /etc/rc[0-6].d
     ```
+    * kernel starts `init`, which starts `rcS.conf`, which runs `rc-sysinit.conf`
+    * `rc-sysinit.conf` will do startup tasks, like LVM and filesystems, then run
+      the `/etc/inittab` runlevel. This runlevel is sent to script `rc.conf`.
+      Additional scripts, like `prefdm.conf` for runlevel 5, are run.
+    * Upstart events are found in `/etc/event.d`, startup jobs are in `/etc/init`
+    * `initctl` is like service, use `initctl options command`, options are:
+      ```
+      start: starts a job
+      stop: stops a job
+      restart: restart a job
+      reload: sends HUP signal to job
+      status: gets job status
+      list: list known jobs
+      emit: emit an event
+      ```
+  * `systemd` is backwards-compatible with `sysvinit` and uses *targets* to emulate
+    runlevels, emulates `telinit`, socket and D-Bus activation, *parallel* startup,
+    doesn't need shell scripts, uses *cgroups*, can mount/unmount, can be drop-in
+    replacement for `sysvinit`
+    * uses `.service` files to delineate services
+    * standard config files:
+    ```
+    /etc/vconsole.conf: default keymapping and console Foundation
+    /etc/sysctl.d/*.conf: drop-in directory for kernel sysctl parameters
+    /etc/os-release: distro ID file
+    ```
+    * `systemctl` is main utility for service management:
+      * `systemctl [options] command [name]`: usage
+      * `systemctl list-units -t service`: list active services
+      * `sudo systemctl [start|stop] 'service'`: start/stop unit
+      * `sudo systemctl [enable|disable] 'service'`: enable/disable unit

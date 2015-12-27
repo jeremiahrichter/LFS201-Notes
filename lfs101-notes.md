@@ -6,7 +6,8 @@
 *The link to the free LFS101 course is [here](https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS101x.2+1T2015/courseware/18780407cf8946c389bed38c4748418c/ "LFS101x")*
 
 ---
-* ### Finding files
+
+### Finding files
   * `locate` uses `updatedb` which needs root, is indexed
   * `file` is a recursive search, non-indexed, uses cwd  
       * `<no args>`: all files in cwd
@@ -25,8 +26,10 @@
       * `size [number{ⵁ,c,k,M,G}]`: size can be searched, a raw number
         being used for 512-byte blocks, c for bytes, k for kilobytes, M
         megabytes, G gigabytes, `n`, `+n` `-n` meaning as above
+
 ---
-* ### Backing up
+
+### Backing up
   * backup uses `cp` or `rsync`
       * `rsync` doesn't copy not changed files
       * `rsync` can remote copy using `[target]:[path]` where target
@@ -51,8 +54,10 @@
       * `of=`: output file/device
       * `bs=`: block size
       * `count=`: how many blocks to copy
+
 ---
-* ### Authentication
+
+### Authentication
   * `sudo` is preferred to `su`
     * config in `/etc/sudoers` and in `/etc/sudoers.d/`
     * logs to `/var/log/secure`
@@ -62,8 +67,10 @@
       to edit the main file
     * commands run under `sudo` are logged to `/var/log/auth.log` in Debian  
       and family, `/var/log/messages` or `/var/log/secure` on others
+
 ---
-* ### Networking
+
+### Networking
   * `/etc/hosts`: map of IP addresses to hostnames
   * `/etc/resolve.conf`: order of where to look for info
   * `host, dig`: look up IP's for hostnames
@@ -107,8 +114,10 @@
 * `ssh`: command to have a remote shell securely
 * `scp`: use SSH to copy files securely between two systems
   * `scp <localfile> <user@remote>:/path/to/copy`: usage
+
 ---
-* ### Text Editing
+
+### Text Editing
   * `sed`: stream editor
     * `sed -e command <file>`: run commands on file on CLI
     * `sed -f scriptfile <file>`: run commands from scriptfile on file
@@ -154,8 +163,10 @@
     * `-n`: in `head`/`tail`, limit to *n* lines
     * `-f`: with tail continues to monitor and re-output last few lines
   * `strings`: finds strings in binary files
+
 ---
-* ### Printing
+
+### Printing
   * CUPS = **C** ommon **U** nix **P** rinting **S** ystem  
     * `/etc/cups/{cupsd.conf,printers.conf}`: config files for CUPS
       * `cupsd.conf`: system-wide and network configuration
@@ -166,8 +177,10 @@
     * log files are in `/var/log/cups`
     * `/etc/cups/ppd/` where connected printers' have config files
     * `http://localhost:631` is address for cups web interface
+
 ---
-* ### Shell Scripting
+
+### Shell Scripting
   * `#!/path/to/interpreter`: need an interpreter, can be perl/python/bash/tcsh...
   * `read VARIABLE_NAME` to read input
   * `echo $?` to see exit value of child process
@@ -237,8 +250,10 @@
 
     `let x=( 1 + 2 ); echo $x`
     In modern shell scripts the use of `expr` is better replaced with `var=$((...))`
+
 ---
-* ### Advanced Bash Scripting
+
+### Advanced Bash Scripting
 * string operators:
       Operator	Meaning
       [[ string1 > string2 ]]	Compares the sorting order of string1 and string2.
@@ -301,8 +316,10 @@
   `set -x `   # turns on debugging
   ...
   `set +x`    # turns off debugging
+
 ---
-* ### Processes
+
+### Processes
   * `ps`: displays all processes under the running shell
     * `-u`: specify a username by which to filter
     * `-ef`: full detail
@@ -376,4 +393,5 @@
           CMD	Command	Any command to be executed
   * `sleep`: can be used to pause execution in a script to wait for a resource  
     to become available
+
 ---

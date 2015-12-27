@@ -1,12 +1,24 @@
 # LFS201
 ## Notes by Jeremiah Richter
-***
 
-1. ### Course Introduction ###
-  1. #### Introduction
+1. ### Course Introduction
     * nothing  to note
-
-  2. #### Relation to LFS101x.2
     * Use LFS101x.2 as reference
     * notes for that course located [here](./lfs101-notes.md "lfs101-notes")
-
+    * two levels, **LFCS** and **LFCE**
+    * find **domains** and **competencies** [here](http://training.linuxfoundation.org/certification)
+    * only most common options listed
+    * for x86-based machines, assuming 64-bit
+    * focus on **Enterprise Linux** distros, like:
+      * **RHEL** (RED HAT ENTERPRISE LINUX)
+      * **SUSE**
+      * **Ubuntu**, probably 14.04 LTS release
+      * virtual install recommended to avoid damage to a working installation
+    * 12 months access to course
+    * There are labs and exercises with answer solutions, but they are not
+      graded, no final exam
+    * `Gnome` is focused on because of the larger user base, not because of a
+      preference
+    * **Linux Foundation** is a non-profit consortium dedicated to fostering the
+      growth of Linux. It sponsors the work of Linus Torvalds, organizes LinuxCon,
+      manages the Linux trademark, and supports the Linux Standards Base

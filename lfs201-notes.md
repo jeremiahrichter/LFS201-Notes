@@ -57,5 +57,15 @@
     hand-edited
   * `/boot/grub/grub.conf` and `/boot/grub/menu.lst` are config files for `GRUB 1`
     but shouldn't be hand-edited. `grubby` in **RHEL** 5-7 is normally used
-  * once booted to the `GRUB` menu, `e` can be pressed to enter an interactive
-    shell
+  * once booted to the `GRUB` menu, `e` can be pressed to edit an entry
+  * `GRUB 2` install with `sudo grub2-install /dev/file`
+  * `GRUB 1` install with `grub-install` or `sudo grub` to enter `grub` prompt, then:
+    ```
+    >root (hd0,0)
+    >setup (hd0)
+    >exit
+    ```
+  * in version 1, hard drives are `hd0`, `hd1`, etc, and partitions start at 0
+  * in version 2, hard drives are `hd0`, `hd1`, etc, and partitions start at 1
+  * the *root* partition, in `GRUB` lingo, is the partition the kernel is
+    stored, i.e.: in the `/boot` directory

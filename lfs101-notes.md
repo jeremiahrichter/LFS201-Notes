@@ -167,3 +167,74 @@
     * `/etc/cups/ppd/` where connected printers' have config files
     * `http://localhost:631` is address for cups web interface
 ---
+* ### Shell Scripting
+  * `#!/path/to/interpreter`: need an interpreter, can be perl/python/bash/tcsh...
+  * `read VARIABLE_NAME` to read input
+  * `echo $?` to see exit value of child process
+  * one can declare functions:
+        function_name () {
+          command...
+        }
+    to repeat tasks; arguments are the auto-variables `$1`, `$2`, etc...
+  * At times, you may need to substitute the result of a command as a portion of  
+    another command. It can be done in two ways:
+    * By enclosing the inner command with backticks (\`)
+    * By enclosing the inner command in `$( )`, this allows nesting
+    * `var=value`: setting of variables; `$var` to read; `export var` for child  
+      processes to access
+    * arguments to script:
+      * `$0`: script name
+      * `$1,$2,$3`: additional parameters, `$*` for all in an array
+      * `$#`: number of arguments
+  * In compact form, the syntax of an if statement is:
+        if TEST-COMMANDS; then CONSEQUENT-COMMANDS; fi
+    A more general definition is:
+        if condition
+        then
+         statements
+        else
+         statements
+        fi
+  * `elif`: can be used for subsequent truth testing after first `if`
+  * `[[]]`: double brackets should surround the test condition
+  * can be used like:
+        if [ -f /etc/passwd ] ; then
+          ACTION
+        fi
+    with different test conditions(`man 1 test` for full list):
+        Condition Meaning
+        -e file	Check if the file exists.
+        -d file	Check if the file is a directory.
+        -f file	Check if the file is a regular file (i.e., not a symbolic link, device node, directory, etc.)
+        -s file	Check if the file is of non-zero size.
+        -g file	Check if the file has sgid set.
+        -u file	Check if the file has suid set.
+        -r file	Check if the file is readable.
+        -w file	Check if the file is writable.
+        -x file	Check if the file is executable.
+  * strings can be tested with `==` operator
+  * numbers can be tested with these operators:
+        Operator  Meaning
+        -eq	Equal to
+        -ne	Not equal to
+        -gt	Greater than
+        -lt	Less than
+        -ge	Greater than or equal to
+        -le	Less than or equal to
+  * Arithmetic expressions can be evaluated in the following three ways  
+    (spaces are important!):
+    Using the `expr` utility: `expr` is a standard but somewhat deprecated program.  
+    The syntax is as follows:
+
+    `expr 8 + 8;
+    echo $(expr 8 + 8)`
+
+    Using the `$((...))` syntax: This is the built-in shell format. The syntax is as  
+    follows:
+
+    `echo $((x+1))`
+    Using the built-in shell command let. The syntax is as follows:
+
+    `let x=( 1 + 2 ); echo $x`
+    In modern shell scripts the use of `expr` is better replaced with `var=$((...))`
+---

@@ -238,3 +238,65 @@
     `let x=( 1 + 2 ); echo $x`
     In modern shell scripts the use of `expr` is better replaced with `var=$((...))`
 ---
+* ### Advanced Bash Scripting
+* string operators:
+      Operator	Meaning
+      [[ string1 > string2 ]]	Compares the sorting order of string1 and string2.
+      [[ string1 == string2 ]]	Compares the characters in string1 with the characters in string2.
+      myLen1=${#string1}	Saves the length of string1 in the variable myLen1.
+* parts of a string:
+  At times, you may not need to compare or use an entire string. To extract the  
+  first character of a string we can specify:
+
+  `${string:0:1}`: Here 0 is the offset in the string (i.e., which character to  
+  begin from) where the extraction needs to start and 1 is the number of
+  characters to be extracted.
+
+  To extract all characters in a string after a dot (.), use the following
+   expression: `${string#*.}`
+* `-z` tests a string for the empty string ''
+* boolean expressions:
+      &&  AND "both true"
+      ||  OR  "either true"
+      !   NOT "only if false"
+* case structure:
+      case expression in
+         pattern1) execute commands;;
+         pattern2) execute commands;;
+         pattern3) execute commands;;
+         pattern4) execute commands;;
+         * )       execute some default commands or nothing ;;
+      esac
+* for loop:
+      for variable-name in list
+      do
+          execute one iteration for each item in the
+                  list until the list is finished
+      done
+* while loop:
+      while condition is true
+      do
+          Commands for execution
+          ----
+      done
+* until loop:
+  The until loop repeats a set of statements as long as the control command is false. Thus it is essentially the opposite of the while loop. The syntax is:
+
+      until condition is false
+      do
+          Commands for execution
+          ----
+      done
+* script debugging:
+  Before fixing an error (or bug), it is vital to know its source.
+
+  In bash shell scripting, you can run a script in debug mode by doing  
+  `bash –x ./script_file`. Debug mode helps identify the error because:
+
+  It traces and prefixes each command with the + character.
+  It displays each command before executing it.
+  It can debug only selected parts of a script (if desired) with:
+  `set -x `   # turns on debugging
+  ...
+  `set +x`    # turns off debugging
+---

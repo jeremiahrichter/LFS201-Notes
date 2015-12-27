@@ -2,6 +2,7 @@
 ## Notes by Jeremiah Richter
 
 ### 1. Course Introduction
+
   * nothing  to note
   * Use LFS101x.2 as reference
   * notes for that course located [here](./lfs101-notes.md "lfs101-notes")
@@ -22,7 +23,9 @@
   * **Linux Foundation** is a non-profit consortium dedicated to fostering the
     growth of Linux. It sponsors the work of Linus Torvalds, organizes LinuxCon,
     manages the Linux trademark, and supports the Linux Standards Base
+
 ### 2. System Startup and Shutdown
+
   * boot sequence steps:
     1. **BIOS/UEFI** locates and executes the boot program/loader
     2. the boot loader loads the kernel
@@ -50,7 +53,9 @@
     * `-k`: just sends a message to logged-in users, no shutdown
     * `-c`: cancel pending shutdown
   * `reboot/halt/poweroff`: legacy equivalents
+
 ### 3. GRUB
+
   * **G** rand **U** nified **B** oot **L** oader
   * older systems use `GRUB 1`, newer systems have migrated to `GRUB 2`
   * `/boot/grub/grub.cfg` or `/boot/grub2/grub.cfg` for `GRUB 2` are read at boot,
@@ -71,7 +76,9 @@
   * in version 2, hard drives are `hd0`, `hd1`, etc, and partitions start at 1
   * the *root* partition, in `GRUB` lingo, is the partition the kernel is
     stored, i.e.: in the `/boot` directory
+
 ### 4. init: SystemV, Upstart, Systemd
+
   * `/sbin/init`: first user-level process run on the system and runs until
     shutdown, configures environment, starts login process
   * **SysVinit** was for multi-user mainframes, single processor, each stage must

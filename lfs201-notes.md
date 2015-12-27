@@ -3,7 +3,6 @@
 
 ### 1. Course Introduction
 
-  * nothing  to note
   * Use LFS101x.2 as reference
   * notes for that course located [here](./lfs101-notes.md "lfs101-notes")
   * two levels, **LFCS** and **LFCE**

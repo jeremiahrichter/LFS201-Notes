@@ -280,7 +280,9 @@
           ----
       done
 * until loop:
-  The until loop repeats a set of statements as long as the control command is false. Thus it is essentially the opposite of the while loop. The syntax is:
+  The until loop repeats a set of statements as long as the control  
+  command is false. Thus it is essentially the opposite of the while loop.  
+  The syntax is:
 
       until condition is false
       do
@@ -299,4 +301,79 @@
   `set -x `   # turns on debugging
   ...
   `set +x`    # turns off debugging
+---
+* ### Processes
+  * `ps`: displays all processes under the running shell
+    * `-u`: specify a username by which to filter
+    * `-ef`: full detail
+    * `-eLf`: one line for each process thread
+    * `aux`: all processes for all users
+    * `axo <qualifiers>`: specify which columns, like `stat`,`priority`,`pid`,  
+      `pcpu` or `comm`
+  * `pstree`: shows a list of processes in a tree based on PPID
+  * `top`: realtime list of processes and resource use
+    * *load average*: The load average determines how busy the system is.  
+      A load average of 1.00 per CPU indicates a fully subscribed, but not  
+      overloaded, system. If the load average goes above this value, it indicates  
+      that processes are competing for CPU time. If the load average is very  
+      high, it might indicate that the system is having a problem, such as a  
+      runaway process (a process in a non-responding state).
+    * The second line of the top output displays the total number of processes,  
+      the number of running, sleeping, stopped and zombie processes. Comparing  
+      the number of running processes with the load average helps determine if  
+      the system has reached its capacity or perhaps a particular user is running  
+      too many processes. The stopped processes should be examined to see if  
+      everything is running correctly.
+    * The percentage of user jobs running at a lower priority (niceness - ni)  
+      is then listed. Idle mode (id) should be low if the load average is high,  
+      and vice versa. The percentage of jobs waiting (wa) for I/O is listed.  
+      Interrupts include the percentage of hardware (hi) vs. software  
+      interrupts (si). Steal time (st) is generally used with virtual machines,  
+      which has some of its idle CPU time taken for other uses.
+    * list of columns:
+          Process Identification Number (PID)
+          Process owner (USER)
+          Priority (PR) and nice values (NI)
+          Virtual (VIRT), physical (RES), and shared memory (SHR)
+          Status (S)
+          Percentage of CPU (%CPU) and memory (%MEM) used
+          Execution time (TIME+)
+          Command (COMMAND)
+    * key commands:
+          Command	Output
+          t	Display or hide summary information (rows 2 and 3)
+          m	Display or hide memory information (rows 4 and 5)
+          A	Sort the process list by top resource consumers
+          r	Renice (change the priority of) a specific processes
+          k	Kill a specific process
+          f	Enter the top configuration screen
+          o	Interactively select a new sort order in the process list
+  * load average can be found by `w`, `top` or `uptime`, it's usually listed in  
+    1, 5 and 15-minute increments
+  * 1.00 is a system utilizing resources, but not overly so. The number must be  
+    divided by # of CPUs in system:
+
+        If we had more than one CPU, say a quad-CPU system, we would divide the  
+        load average numbers by the number of CPUs. In this case, for example,  
+        seeing a 1 minute load average of 4.00 implies that the system as a whole  
+        was 100% (4.00/4) utilized during the last minute.
+
+  * You can either use `CTRL-Z` to suspend a foreground job or `CTRL-C` to  
+    terminate a foreground job and can always use the `bg` and `fg` commands to  
+    run a process in the background and foreground, respectively.
+  * use `jobs` to see backgrounded processes
+    * `-l`: shows PID as well
+  * `at` can be used to run commands once at a future date/time
+  * `cron` can schedule repeating tasks:
+    * `/etc/crontab`: main configuration file, don't usually edit this one
+    * `crontab -e`: edits that user's crontab file, there are 6 fields:
+          Field	Description	Values
+          MIN	Minutes	0 to 59
+          HOUR	Hour field	0 to 23
+          DOM	Day of Month	1-31
+          MON	Month field	1-12
+          DOW	Day Of Week	0-6 (0 = Sunday)
+          CMD	Command	Any command to be executed
+  * `sleep`: can be used to pause execution in a script to wait for a resource  
+    to become available
 ---

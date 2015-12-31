@@ -181,3 +181,50 @@
       * `systemctl list-units -t service`: list active services
       * `sudo systemctl [start|stop] 'service'`: start/stop unit
       * `sudo systemctl [enable|disable] 'service'`: enable/disable unit
+
+### 5. Linux Filesystem Tree Layout
+
+  * files/folders are organized between *sharable/non-sharable* and *variable/static*
+    * *sharable* files can be shared across hosts
+    * *static* files don't change without administrator intervention,       
+      *variable* files might change on their own
+  * **FHS** or **F** ile **H** ierarchy **S** tandard is administered by
+    the **Free Standards Group** and now the **Linux Foundation**, specifies  
+    what directories need to be present and purpose, not followed exactly
+  * no package should make new root directories
+  * `/boot` essential files for booting:
+    * `vmlinuz`: compressed linux kernel
+    * `initramfs`: initial RAM filesystem, mounted before real root filesystem  
+    becomes available
+    * `config`: config file for kernel compilation
+    * `System.map`: kernel symbol table, used for debugging
+  * `/dev` holds device files, also called *nodes*, respresent devices connected  
+    to the system, network devices have names like `eth1` or `wlan0`
+    * modern systems use `udev`, which creates device nodes when devices are  
+      added or connected
+  * `/home` contains users' files and directories, and sometimes groups
+    * `$HOME`: shell environmental variable that contains the current user's  
+      home directory path, aliased to `~`
+    * root's home directory resides at `/root`
+  * `/media`: automounted media are mounted under here, being replaced by  
+    `/run/media/[username]`
+  * `/mnt`: temporary mount point for `NFS`, `Samba`, `CIFS` and `AFS`
+  * `/opt`: for software packages that don't want files scattered throughout  
+    the filesystem
+  * `/proc`: pseudo-filesystem in memory with kernel data structures and  
+    processes
+    * `/proc/interrupts`, `/proc/meminfo`, `/proc/mounts`, `/proc/partitions`  
+    are up-to-date views of hardware
+    * `/proc/filesystems` and `/proc/sys/` provide system config and interfaces
+    * `/sys`: mount point for `sysfs`, in-memory, provides system info  
+      and can modify system values
+  * `/tmp`: for temp files, accessed by any user/app, are deleted by `cron`
+    jobs, reboots, sometimes is a `ramfs`
+  * `/usr` is a **secondary hierarchy**, for files not needed for booting  
+    can be mounted over the network
+    * software packages shouldn't create subdirectories under `/usr`
+    * typically read-only data, may have binaries not used in single-user  
+      mode
+    * `/usr/share/man`: where `man` pages are stored
+  * `/var` contains *variable*, or *volatile* data files that change
+    frequently during system operation

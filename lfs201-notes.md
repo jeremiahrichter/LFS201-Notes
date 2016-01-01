@@ -227,4 +227,33 @@
       mode
     * `/usr/share/man`: where `man` pages are stored
   * `/var` contains *variable*, or *volatile* data files that change
-    frequently during system operation
+    frequently during system operation:
+    * log files
+    * spool files for printing/mail queues
+    * admin data files
+    * cache contents
+    * for security reasons `/var` is often a separate filesystem
+    * `/var/log`: most of the log files are here
+    * `/var/spool`: local files for mail/printing/cron jobs
+  * `/run` is new directory tree used by many major
+    * not officially accepted by the **FHS**
+    * is to store transient files and runtime info
+    * usually an empty mount point with `tmpfs` ram disk like
+      `/dev/shm` mounted there at runtime
+    * `/var/run`, `/var/lock` can be symbolic links under `/run`,  
+      among others
+    * `/lib`: libraries for binaries in `/bin` and `/sbin`
+      * kernel modules are often under `/lib/modules/<kernel-version-number>`
+      * **PAM** (**P** luggable **A** uthentication **M** odules) are  
+        stored under `/lib/security`
+      * `/lib64` may exist to separate 32-bit and 64-bit libraries if  
+        they exist side-by-side
+    * `/bin`: executables and scripts for system admins and users  
+      that are required before mounting other filesystems, like in  
+      single-user or recovery mode
+      * no subdirectories
+      * some non-essential binaries go into `/usr/bin`
+    * `/sbin` has binaries essential for booting, restoring, recovering  
+      or repairing, must be able to mount
+    * recent distros have been combining `/bin` and `/sbin` into their  
+      `/usr` versions and sym-linking back to their root locations

@@ -242,18 +242,18 @@
       `/dev/shm` mounted there at runtime
     * `/var/run`, `/var/lock` can be symbolic links under `/run`,  
       among others
-    * `/lib`: libraries for binaries in `/bin` and `/sbin`
-      * kernel modules are often under `/lib/modules/<kernel-version-number>`
-      * **PAM** (**P** luggable **A** uthentication **M** odules) are  
-        stored under `/lib/security`
-      * `/lib64` may exist to separate 32-bit and 64-bit libraries if  
-        they exist side-by-side
-    * `/bin`: executables and scripts for system admins and users  
-      that are required before mounting other filesystems, like in  
-      single-user or recovery mode
-      * no subdirectories
-      * some non-essential binaries go into `/usr/bin`
-    * `/sbin` has binaries essential for booting, restoring, recovering  
-      or repairing, must be able to mount
-    * recent distros have been combining `/bin` and `/sbin` into their  
-      `/usr` versions and sym-linking back to their root locations
+  * `/lib`: libraries for binaries in `/bin` and `/sbin`
+    * kernel modules are often under `/lib/modules/<kernel-version-number>`
+    * **PAM** (**P** luggable **A** uthentication **M** odules) are  
+      stored under `/lib/security`
+    * `/lib64` may exist to separate 32-bit and 64-bit libraries if  
+      they exist side-by-side
+  * `/bin`: executables and scripts for system admins and users  
+    that are required before mounting other filesystems, like in  
+    single-user or recovery mode
+    * no subdirectories
+    * some non-essential binaries go into `/usr/bin`
+  * `/sbin` has binaries essential for booting, restoring, recovering  
+    or repairing, must be able to mount
+  * recent distros have been combining `/bin` and `/sbin` into their  
+    `/usr` versions and sym-linking back to their root locations

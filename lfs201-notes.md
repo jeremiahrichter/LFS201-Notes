@@ -257,3 +257,35 @@
     or repairing, must be able to mount
   * recent distros have been combining `/bin` and `/sbin` into their  
     `/usr` versions and sym-linking back to their root locations
+
+### 6. Kernel Services and Configuration
+  * Narrowly defined, **Linux** is only the **kernel** of the operating system,  
+    which contains libraries and applications that interact with the **kernel**
+  * the **kernel** connects the hardware to the software and manages system  
+    resources, handles device drivers
+  * parameters can be passed on the **kernel command line**, usually on the `kernel`  
+  line of the `GRUB` config file (or `linux16` line)
+    * to view these parameters use `cat /proc/cmdline`
+    * kernel parameters can be found in kernel source under
+      `Documentation/kernel-parameters.txt`
+    * at http://kernel.org/doc/Documentation/kernel-parameters.txt
+    * possibly with a package called `kernel-doc` or `linux-doc`
+    * under `man bootparam`
+      ```
+      ro: mount root device as read-only
+      root: root filesystem
+      rd_LVM_LV: activate root filesystem in the logical volume specified
+      rd_NO_LUKS: disables LUKS detection
+      rd_NO_DM: disables DM RAID detection
+      LANG: system language
+      SYSFONT: console font
+      KEYTABLE: keytable filename
+      ```
+        * *Note*: `rd`- prefixed options are usually only for RedHat distros
+    * `sysctl`: used to read and tune kernel parameters at runtime
+      * `sysctl -a`: list all options; each option corresponds with pseudofiles
+        under `/proc/sys/`, with directory slashes being replaced by dots
+      * `sysctl path.to.pseudofile=value`
+      * settings can be made persistent across reboots by adding the settings to
+        `/etc/sysctl.conf`, can be purged with `sudo sysctl -p`, sometimes the  
+        file is in `/usr/lib/sysctl.d/00-system`

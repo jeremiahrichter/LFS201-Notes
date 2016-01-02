@@ -263,8 +263,8 @@
     which contains libraries and applications that interact with the **kernel**
   * the **kernel** connects the hardware to the software and manages system  
     resources, handles device drivers
-  * parameters can be passed on the **kernel command line**, usually on the `kernel`  
-  line of the `GRUB` config file (or `linux16` line)
+  * parameters can be passed on the **kernel command line**, usually on the  
+   `kernel` line of the `GRUB` config file (or `linux16` line)
     * to view these parameters use `cat /proc/cmdline`
     * kernel parameters can be found in kernel source under
       `Documentation/kernel-parameters.txt`
@@ -282,10 +282,21 @@
       KEYTABLE: keytable filename
       ```
         * *Note*: `rd`- prefixed options are usually only for RedHat distros
-    * `sysctl`: used to read and tune kernel parameters at runtime
-      * `sysctl -a`: list all options; each option corresponds with pseudofiles
-        under `/proc/sys/`, with directory slashes being replaced by dots
-      * `sysctl path.to.pseudofile=value`
-      * settings can be made persistent across reboots by adding the settings to
-        `/etc/sysctl.conf`, can be purged with `sudo sysctl -p`, sometimes the  
-        file is in `/usr/lib/sysctl.d/00-system`
+  * `sysctl`: used to read and tune kernel parameters at runtime
+    * `sysctl -a`: list all options; each option corresponds with pseudofiles
+      under `/proc/sys/`, with directory slashes being replaced by dots
+    * `sysctl path.to.pseudofile=value`
+    * settings can be made persistent across reboots by adding the settings to
+      `/etc/sysctl.conf`, can be purged with `sudo sysctl -p`, sometimes the  
+      file is in `/usr/lib/sysctl.d/00-system`
+
+### 7. Kernel Modules
+
+  * **modules** are pieces of software the kernel can load/unload at runtime,  
+    like device drivers or network protocols or filesystems; they can take
+    parameters
+  * **Linux** still maintains a *monolithic* kernel architecture, not a
+    *microkernel*, as a loaded module is fully functional and uses shared  
+    resources and locks, instead of messages
+  * `lsmod`: list loaded modules
+  * insmod

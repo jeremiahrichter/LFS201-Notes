@@ -354,3 +354,25 @@
       ```
       KERNEL=="fuse", MODE="0666", OWNER="root", GROUP="root"
       ```
+### 9. Partitioning and Formatting Disks
+
+  * rotational media have `heads`, which read `tracks`, groups of which are
+    called `cylinders` when they are in the same location on all platters,  
+    which are separated into `sectors`, mostly **512** bytes but can be  
+    **4096**
+  * disks may be divided into contiguous sectors/cylinders or `partitions`
+  * with **M** aster **B** oot **R** ecord, there can be **4** primary  
+    partitions, one of which can be an *extended* partition, which can be  
+    sub-divided until the max partition limit is reached (usually **15**)
+  * **Linux** does not require partitions to begin/end on cylinder boundaries,
+    but will try to play nice with other OSes and do this
+  * there are reasons to partition:
+        Separation, like `/home` on own partition
+        Sharing, like between other OSes
+        Security, like quotas for different parts of the system
+        Size, as some data are constant, and some grow, like the `/var` folder
+        Performance, like near the center of a platter
+        Swap, as Linux likes to have a separate swap partition
+  * the **MBR** contains the partition table, is **512 bytes** in length
+    * the partition table is **64 bytes** long and placed after the **446
+      byte** boot record, which has program code

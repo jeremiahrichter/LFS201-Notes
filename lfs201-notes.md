@@ -354,6 +354,7 @@
       ```
       KERNEL=="fuse", MODE="0666", OWNER="root", GROUP="root"
       ```
+      
 ### 9. Partitioning and Formatting Disks
 
   * rotational media have `heads`, which read `tracks`, groups of which are
@@ -375,4 +376,51 @@
         Swap, as Linux likes to have a separate swap partition
   * the **MBR** contains the partition table, is **512 bytes** in length
     * the partition table is **64 bytes** long and placed after the **446
-      byte** boot record, which has program code
+      byte** boot record, which has program code, usually the boot loader.
+    * only one partition may be marked as active, where boot loader looks for
+      items to load
+    * each entry on partition table is 16 bytes long, describing one of four  
+      possible partitions, containing:
+      * active bit
+      * beginning address in cylinder/heads/sectors format (ignored by  
+        **Linux**)
+      * partition type code (`xfs`, `LVM`, `ntfs`, `swap`, etc.)
+      * ending address in **CHS** format (ignored by **Linux**)
+      * start sector counting from zero
+      * number of sectors in partition
+    * Linux uses the last two fields for **L** ogical **B** lock  
+    **A** ddressing (**LBA**)
+  * device nodes are usually accessed through Linux's **VFS** or **V** irtual
+    **F** ile **S** ystem; writing to device nodes directly is dangerous
+  * **SCSI** and **SATA** drives follow simple naming scheme: `/dev/sd{a,b,c,...}`
+    with partitions being numbered suffixes, eg: `/dev/sda1`
+  * **SCSI** devices are enumerated by controller # (a,b,c part) then device #
+    (1,2,3 part)
+  * `blkid` is a utility to locate block devices and report on their attributes
+    * uses `libblkid`
+    * can take a device as an argument
+    * only works on non-empty partition
+  * `lsblk` lists block devices in a tree format
+  * Linux systems should use a minimum of two partitions:
+    * `/` but there are usually more mount points under root for data security
+      and easy backup
+    * `swap`: used as extension of physical memory; non-file-mapped pages are
+      moved to disk until needed
+  * backup of **MBR**: `sudo dd if=/dev/sda of=mbrbackup bs=512 count=1`
+  * restore **MBR**: `sudo dd if=mbrbackup of=/dev/sda bs=512 count=1`
+  * `fdisk`: menu-driven partition editor
+  * `sfdisk`: non-interactive `fdisk` for scripting
+  * `parted`: **GNU** partition program
+  * `gparted`: **GTK** frontend for `parted`
+  * `fdisk` commands:
+    ```
+    m: display the menu
+    p: print the partition
+    n: new partition
+    d: delete a partition
+    t: change a partition type
+    w: write the partition table info
+    q: quit without saving changes
+    ```
+    * can use `sudo partprobe -s` to re-read partition table, but best to  
+      reboot

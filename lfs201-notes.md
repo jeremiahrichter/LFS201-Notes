@@ -354,7 +354,7 @@
       ```
       KERNEL=="fuse", MODE="0666", OWNER="root", GROUP="root"
       ```
-      
+
 ### 9. Partitioning and Formatting Disks
 
   * rotational media have `heads`, which read `tracks`, groups of which are
@@ -424,3 +424,27 @@
     ```
     * can use `sudo partprobe -s` to re-read partition table, but best to  
       reboot
+
+### 10. Encrypting Disks
+
+  * Most Linux distros offer block-level encryption using **LUKS** (**L** inux  
+    **U** nified **K** ey **S** etup), highly recommended for laptops/smartphones
+  * **LUKS** is installed on top of `cryptsetup`,which uses the `dm-crypt`  
+    kernel module, which uses `device mapper` used by **LVM** as well
+  * **LUKS** stores info in partition header, so is easy to migrate to other  
+    systems
+  * `cryptsetup [option...] <action> <action-specific>`: usage
+  * for example `LVM` partition `/dev/VG/MYSECRET`:
+    * `sudo cryptsetup luksFormat /dev/VG/MYSECRET`to enable `LUKS` and set  
+      passphrase
+    * use `cat /proc/crypto` to ciphers supported, use `--cipher` option to   
+      specify which one to use a different one
+    * `sudo cryptsetup --verbose luksOpen /dev/VG/MYSECRET` to open partition
+    * `sudo mkfs.ext4 /dev/mapper/SECRET` to format
+    * `sudo mount /dev/mapper/SECRET /mnt` to mount
+    * `sudo umount /mnt` to unmount
+    * `sudo cryptsetup --verbose luksClose SECRET` to remove from mapper
+  * to mount at boot:
+    1. make an entry in `/etc/fstab`
+    2. add an entry to `/etc/crypttab`
+            SECRET  /dev/mapper/MYSECRET

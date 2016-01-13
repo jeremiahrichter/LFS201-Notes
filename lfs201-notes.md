@@ -448,3 +448,18 @@
     1. make an entry in `/etc/fstab`
     2. add an entry to `/etc/crypttab`
             SECRET  /dev/mapper/MYSECRET
+### 11. Linux Filesystems and the VFS
+  * **VFS** is an abstraction layer (<b>V</b>irtual <b>F</b>ile <b>S</b>ystem)  
+    that stands between the software and the on-disk file system
+  * *raw* writing to disk (ignoring the filesystem) is dangerous
+  * filesystems can be on hard disk partitions, `LVM`s or on a network drives
+  * multiple filesystems can be mounted under a root partition at a mount point
+  * some mounted filesystems are virtual(`/proc`, `/sys`, `/dev`)
+  * the **VFS** sits between the reading/writing I/O system calls and the hardware
+    and handles the location and hardware
+  * some filesystems don't have full user permissions and the **VFS** must add
+    them
+  * some filesystem drivers exist outside the kernel, but kernel-mode is faster
+  * **journaling** filesystems recover from crashes with little to no corruption
+    * they use transactions, meaning writes/updates occur **atomically**
+    * there is a log file of transactions

@@ -527,3 +527,63 @@
     * general form:
           mkfs [t fstype] [options] [device-file]
     * use `man mkfs.[filesystem]` for more options
+  * `fsck` is frontend for filesystem-specific programs to check for errors:
+        ls -lh /sbin/fsck*
+        -rwxr-xr-x 1 root root  44K Nov  2 18:04 /sbin/fsck
+        -rwxr-xr-x 1 root root  35K Nov  2 18:04 /sbin/fsck.cramfs
+        -rwxr-xr-x 5 root root 251K Aug  6 05:43 /sbin/fsck.ext2
+        -rwxr-xr-x 5 root root 251K Aug  6 05:43 /sbin/fsck.ext3
+        -rwxr-xr-x 5 root root 251K Aug  6 05:43 /sbin/fsck.ext4
+        -rwxr-xr-x 5 root root 251K Aug  6 05:43 /sbin/fsck.ext4dev
+        -rwxr-xr-x 2 root root 395K May 16  2013 /sbin/fsck.jfs
+        -rwxr-xr-x 1 root root  76K Nov  2 18:04 /sbin/fsck.minix
+        lrwxrwxrwx 1 root root   10 Aug 27  2013 /sbin/fsck.reiserfs -> reiserfsck
+        -rwxr-xr-x 1 root root  433 Sep  8 02:42 /sbin/fsck.xfs
+    * are equivalent:
+          sudo fsck -t ext4 /dev/sda10
+          sudo fsck.ext4 /dev/sda10
+    * `fsck` is run after a set number of mounts or after an abnormal shutdown.  
+      It can only run on an unmounted filesystem. You can force a check of all  
+      mounted filesystems at next boot with:
+          sudo touch /forcefsck
+          sudo reboot
+    * general format is:
+          fsck [-t fstype] [options] [device-file]
+      * `-r`: manually fix errors
+      * `-a`: automatically fix errors as best as possible
+  * **Linux** can join multiple filesystems under one directory tree under `/`  
+    using `mount` and `umount`, with `mount` attaching them and `umount` detaching  
+    them
+    * `mount point`: directory where filesystem is attached
+    * the `mount point` must exist before mounting, all files under `mount point`  
+      are hidden until the overlaid filesystem is unmounted
+    * only the superuser can mount/unmount
+    * all usages of `mount` below are equivalent:
+          sudo mount /dev/sda2 /home
+          sudo mount LABEL=home /home
+          sudo mount -L home /home
+          sudo mount UUID=26d58ee2-9d20-4dc7-b6ab-aa87c3cfb69a /home
+          sudo mount -U 26d58ee2-9d20-4dc7-b6ab-aa87c3cfb69a /home
+    * labels are assigned by filesystem utilities like `e2label`, and **UUID**s  
+      are assigned when the partition is created
+    * mounting by **UUID** is preferred, then by label, finally by device node
+    * `mount -a`: mount all filesystems in `/etc/fstab`
+    * `umount [device-name|mount-point]`: unm0unt a mounted filesystem
+      * cannot be done while filesystems in use by a process:
+        * use `fuser` to find out which user is accessing the filesystem
+        * use `lsof` to see which files are being accessed that may block unmounting
+    * `/etc/fstab`: file of mount listing used to mount at boot and for `mount -a`,
+      among other things
+    * each record has fields separated by whitespace:
+          1. device node, label or UUID, none for tmpfs, proc, sysfs, etc.
+          2. mount point
+          3. filesystem type
+          4. comma-separated list of options
+          5. dump frequency, or a 0, used by 'dump -w' command
+          6. 'fsck' pass number (or 0 meaning do not check state at boot)
+    * with a record in `/etc/fstab`, just the mount point can be given to `mount`  
+      to mount a filesystem:
+          sudo mount /usr/src
+      instead of:
+          sudo mount LABEL=src /usr/src
+    * `mount`: raw command lists mounted filesystems

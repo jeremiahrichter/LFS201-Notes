@@ -466,3 +466,64 @@
   * `cat /proc/filesystems` => list of supported kernel filesystems
   * `tmpfs` is better than a `ramdisk` because it can be swapped, it uses  
     memory more efficiently, and doesn't need to be formatted before use
+### 12. Filesystem Features: Attributes, Creating, Checking, Mounting
+  * an `inode` is a data structure on disk that describes and stores file  
+    attributes including location. Every file has an `inode`. the `inode` stores:
+        Permissions
+        User and group ownership
+        Size
+        Timestamps in nanoseconds:
+          - last access time
+          - last modification time
+          - change time
+        filenames not stored in an inode, but in a directory file
+    all I/O activity involves updating the file's `inode` as well as the file's  
+    data
+  * `directory file`: file that associates file names and inodes. Two ways to  
+    associate:
+      1. **Hard** links point at an `inode`
+      2. **Soft** (symbolic) links point to a file name that has an `inode`
+    * each association of directory file to `inode` is called a link
+    * `ln` is command to make new links
+    * because more than one directory file can point to one `inode`, a file can  
+      have more than one name, but a file can only have one `inode`
+    * programs search for `inodes` in directories and the path/name is used as  
+      an `inode` number in memory
+  * **Extended Attributes** associate metadata not interpreted by the filesystem  
+    directly with files. Four namespaces exist:
+        User
+        Trusted
+        Security
+        System
+    The system namespace is used for **ACL**s or **A**ccess **C**ontrol **L**ists,
+    and security is used by **SELinux**
+    * values are stored in the `inode` and can be set only by `root`
+      * `lsattr` to view and `chattr` to set flags:
+            i: immutable, not modifiable by any user, no hard linking
+            a: append write mode only
+            d: file not backed up with dump program
+            A: no atime update when file is accessed but not modified
+        * `chattr [+|-|=mode] filename`: change attributes
+        * `lsattr filename`: views attributes
+  * `mkfs` is the command for **formatting** a filesystem on a partition, but is  
+    a frontend for specific programs:
+        ls -lh /sbin/mkfs*
+        -rwxr-xr-x. 1 root root  11K Nov 18 06:32 /sbin/mkfs
+        -rwxr-xr-x. 1 root root 273K Oct  8 10:59 /sbin/mkfs.btrfs
+        -rwxr-xr-x. 1 root root  32K Nov 18 06:32 /sbin/mkfs.cramfs
+        -rwxr-xr-x. 5 root root 109K Jun 17  2015 /sbin/mkfs.ext2
+        -rwxr-xr-x. 5 root root 109K Jun 17  2015 /sbin/mkfs.ext3
+        -rwxr-xr-x. 5 root root 109K Jun 17  2015 /sbin/mkfs.ext4
+        -rwxr-xr-x. 5 root root 109K Jun 17  2015 /sbin/mkfs.ext4dev
+        -rwxr-xr-x. 1 root root  32K Sep 18 12:28 /sbin/mkfs.fat
+        -rwxr-xr-x. 1 root root  73K Nov 18 06:32 /sbin/mkfs.minix
+        lrwxrwxrwx. 1 root root    8 Sep 18 12:28 /sbin/mkfs.msdos -> mkfs.fat
+        lrwxrwxrwx. 1 root root   16 Jun 17  2015 /sbin/mkfs.ntfs -> /usr/sbin/mkntfs
+        lrwxrwxrwx. 1 root root    8 Sep 18 12:28 /sbin/mkfs.vfat -> mkfs.fat
+        -rwxr-xr-x. 1 root root 323K Jul 30 12:00 /sbin/mkfs.xfs
+    * are equivalent:
+          sudo mkfs -t ext4 /dev/sda10
+          sudo mkfs.ext4 /dev/sda10
+    * general form:
+          mkfs [t fstype] [options] [device-file]
+    * use `man mkfs.[filesystem]` for more options

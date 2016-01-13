@@ -463,3 +463,6 @@
   * **journaling** filesystems recover from crashes with little to no corruption
     * they use transactions, meaning writes/updates occur **atomically**
     * there is a log file of transactions
+  * `cat /proc/filesystems` => list of supported kernel filesystems
+  * `tmpfs` is better than a `ramdisk` because it can be swapped, it uses  
+    memory more efficiently, and doesn't need to be formatted before use

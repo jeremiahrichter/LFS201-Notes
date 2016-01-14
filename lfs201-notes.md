@@ -26,3 +26,5 @@
 ### 11. [Linux Filesystems and the VFS](/sections/11.md)
 
 ### 12. [Filesystem Features: Attributes, Creating, Checking, Mounting](/sections/12.md)
+
+### 13. [Filesystem Features: Swap, Quates, Usage](/sections/13.md)

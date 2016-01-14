@@ -27,4 +27,4 @@
 
 ### 12. [Filesystem Features: Attributes, Creating, Checking, Mounting](/sections/12.md)
 
-### 13. [Filesystem Features: Swap, Quates, Usage](/sections/13.md)
+### 13. [Filesystem Features: Swap, Quotas, Usage](/sections/13.md)

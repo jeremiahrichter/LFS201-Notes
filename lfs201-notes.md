@@ -30,3 +30,5 @@
 ### 13. [Filesystem Features: Swap, Quotas, Usage](/sections/13.md)
 
 ### 14. [The Ext2/Ext3/Ext4 Filesystems](/sections/14.md)
+
+### 15. [The XFS and btrfs Filesystems](/sections/15.md)

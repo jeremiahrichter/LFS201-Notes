@@ -33,4 +33,4 @@
 
 ### 15. [The XFS and btrfs Filesystems](/sections/15.md)
 
-### 16. [Logical Volume Management](/sections/16.md)
+### 16. [Logical Volume Management (LVM)](/sections/16.md)

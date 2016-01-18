@@ -32,3 +32,5 @@
 ### 14. [The Ext2/Ext3/Ext4 Filesystems](/sections/14.md)
 
 ### 15. [The XFS and btrfs Filesystems](/sections/15.md)
+
+### 16. [Logical Volume Management](/sections/16.md)

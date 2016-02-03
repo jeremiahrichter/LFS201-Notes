@@ -42,3 +42,5 @@
 ### 19. [Linux Security Modules](/sections/19.md)
 
 ### 20. [Processes](/sections/20.md)
+
+### 21. [Signals](/sections/21.md)

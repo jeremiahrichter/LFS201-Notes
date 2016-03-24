@@ -44,3 +44,5 @@
 ### 20. [Processes](/sections/20.md)
 
 ### 21. [Signals](/sections/21.md)
+
+### 22. [System Monitoring](/sections/22.md)

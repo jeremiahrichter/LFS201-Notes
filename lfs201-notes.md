@@ -50,3 +50,5 @@
 ### 23. [Process Monitoring](/sections/23.md)
 
 ### 24. [I/O Monitoring and Tuning](/sections/24.md)
+
+### 25. [I/O Scheduling](/sections/25.md)

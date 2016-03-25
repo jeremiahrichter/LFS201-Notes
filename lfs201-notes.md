@@ -52,3 +52,5 @@
 ### 24. [I/O Monitoring and Tuning](/sections/24.md)
 
 ### 25. [I/O Scheduling](/sections/25.md)
+
+### 25. [Memory: Monitoring Usage and Tuning](/sections/26.md)

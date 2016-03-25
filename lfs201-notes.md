@@ -54,3 +54,5 @@
 ### 25. [I/O Scheduling](/sections/25.md)
 
 ### 26. [Memory: Monitoring Usage and Tuning](/sections/26.md)
+
+### 27. [Package Management Systems](/sections/27.md)

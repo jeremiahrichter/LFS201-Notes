@@ -48,3 +48,5 @@
 ### 22. [System Monitoring](/sections/22.md)
 
 ### 23. [Process Monitoring](/sections/23.md)
+
+### 24. [I/O Monitoring and Tuning](/sections/24.md)

@@ -56,3 +56,5 @@
 ### 26. [Memory: Monitoring Usage and Tuning](/sections/26.md)
 
 ### 27. [Package Management Systems](/sections/27.md)
+
+### 28. [RPM](/sections/28.md)

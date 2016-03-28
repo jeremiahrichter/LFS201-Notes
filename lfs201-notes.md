@@ -60,3 +60,5 @@
 ### 28. [RPM](/sections/28.md)
 
 ### 29. [DPKG](/sections/29.md)
+
+### 30. [yum](/sections/30.md)

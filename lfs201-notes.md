@@ -64,3 +64,5 @@
 ### 30. [yum](/sections/30.md)
 
 ### 31. [zypper](/sections/31.md)
+
+### 32. [APT](/sections/32.md)

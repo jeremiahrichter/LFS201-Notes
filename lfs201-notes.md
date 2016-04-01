@@ -62,3 +62,5 @@
 ### 29. [DPKG](/sections/29.md)
 
 ### 30. [yum](/sections/30.md)
+
+### 31. [zypper](/sections/31.md)

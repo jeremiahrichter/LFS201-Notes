@@ -65,4 +65,6 @@
 
 ### 31. [zypper](/sections/31.md)
 
-### 32. [APT](/sections/32.md)
+### 32. [APT](/sections/32.md).
+
+### 33. [User Account Management](/sections/33.md)

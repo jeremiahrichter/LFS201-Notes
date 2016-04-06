@@ -70,3 +70,5 @@
 ### 33. [User Account Management](/sections/33.md)
 
 ### 34. [Group Management](/sections/34.md)
+
+### 35. [File Permissions and Ownership](/sections/35.md)

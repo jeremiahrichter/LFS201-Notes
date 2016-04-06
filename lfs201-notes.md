@@ -68,3 +68,5 @@
 ### 32. [APT](/sections/32.md).
 
 ### 33. [User Account Management](/sections/33.md)
+
+### 34. [Group Management](/sections/34.md)

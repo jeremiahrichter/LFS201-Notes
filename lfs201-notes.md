@@ -72,3 +72,5 @@
 ### 34. [Group Management](/sections/34.md)
 
 ### 35. [File Permissions and Ownership](/sections/35.md)
+
+### 36. [Pluggable Authentication Modules (PAM)](/sections/36.md)

@@ -74,3 +74,5 @@
 ### 35. [File Permissions and Ownership](/sections/35.md)
 
 ### 36. [Pluggable Authentication Modules (PAM)](/sections/36.md)
+
+### 37. [Backup and Recovery Methods](/sections/37.md)

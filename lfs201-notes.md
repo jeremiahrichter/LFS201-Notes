@@ -78,3 +78,5 @@
 ### 37. [Backup and Recovery Methods](/sections/37.md)
 
 ### 38. [Network Addresses](/sections/38.md)
+
+### 39. [Network Devices and Configuration](/sections/39.md)

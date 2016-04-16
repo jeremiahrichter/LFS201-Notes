@@ -80,3 +80,5 @@
 ### 38. [Network Addresses](/sections/38.md)
 
 ### 39. [Network Devices and Configuration](/sections/39.md)
+
+### 40. [Firewalls](/sections/40.md)

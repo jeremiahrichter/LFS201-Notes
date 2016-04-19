@@ -84,3 +84,5 @@
 ### 40. [Firewalls](/sections/40.md)
 
 ### 41. [Basic Troubleshooting](/sections/41.md)
+
+### 42. [System Rescue](/sections/42.md)

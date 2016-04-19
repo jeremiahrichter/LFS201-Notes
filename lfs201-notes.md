@@ -82,3 +82,5 @@
 ### 39. [Network Devices and Configuration](/sections/39.md)
 
 ### 40. [Firewalls](/sections/40.md)
+
+### 41. [Basic Troubleshooting](/sections/41.md)
